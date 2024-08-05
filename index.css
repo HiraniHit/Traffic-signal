@@ -1,0 +1,47 @@
+.signal{
+    display: flex;
+    justify-content: space-around;
+}
+.box{
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+.light{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    width: 100px;
+    gap: 10px;
+    background-color: white;
+    color: white;
+    padding: 10px;
+    background-color: rgb(20, 20, 20);
+}
+.ratio{
+    width:90px;
+}
+.light-red{
+    background-color: rgb(255, 186, 186);
+}
+.light-yellow{
+    background-color: rgb(244, 244, 205);
+}
+.light-green{
+    background-color: rgb(193, 245, 193);
+}
+.red{
+    background-color: red;
+}
+
+.green{
+    background-color: green;
+}
+.yellow{
+    background-color: yellow;
+}
+.time-counter{
+    text-align: center;
+    padding: 8px ;
+}
