@@ -1,5 +1,6 @@
 let totalTime = document.querySelector(".total-time");
 let allLight1 = document.querySelector(".street-1");
+let timeDisplay = document.querySelectorAll(".time-counter");
 let time1 = document.querySelector(".time-1");
 let time2 = document.querySelector(".time-2");
 let time3 = document.querySelector(".time-3");
@@ -12,17 +13,53 @@ let lights1 = document.querySelectorAll(".street-1 .box");
 let lights2 = document.querySelectorAll(".street-2 .box");
 let lights3 = document.querySelectorAll(".street-3 .box");
 let lights4 = document.querySelectorAll(".street-4 .box");
+let yellowLight = document.querySelectorAll(`.light-yellow`);
 let inputStreet1 = document.querySelector(".input-street-1");
 let inputStreet2 = document.querySelector(".input-street-2");
 let inputStreet3 = document.querySelector(".input-street-3");
 let inputStreet4 = document.querySelector(".input-street-4");
 let extraTimeCountDown;
 let stop = false;
-
+let allArrow = document.querySelectorAll(".arrow")
 let arrow1 = document.querySelectorAll(".street-1 .arrow");
 let arrow2 = document.querySelectorAll(".street-2 .arrow");
 let arrow3 = document.querySelectorAll(".street-3 .arrow");
 let arrow4 = document.querySelectorAll(".street-4 .arrow");
+let isUnderTime = [];
+
+let timeJson = [
+    [8.0, 11.0], // morning rush
+    [18.0, 21.0], //evening rush
+    [14.0, 17.0],
+];
+function checkTime() {
+    let currentMinutes = new Date().getMinutes();
+    let currentHours = new Date().getHours();
+    let currentTime = currentHours.toString() + ".".concat(currentMinutes);
+    let realTime = parseFloat(currentTime);
+    isUnderTime = [];
+
+    timeJson.map((value) => {
+        if (value[0] <= realTime && realTime <= value[1]) {
+            isUnderTime.push(true);
+        } else {
+            isUnderTime.push(false);
+        }
+    });
+    console.log(isUnderTime);
+
+    if (!isUnderTime.includes(true)) {
+        yellowLight.forEach((value) => {
+            value.classList.add("yellow");
+        });
+        let redLite = document.querySelectorAll(".red");
+        redLite.forEach((value) => value.classList.remove("red"));
+
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function extraTime(timer) {
     let time = parseInt(totalTime.value);
@@ -35,15 +72,36 @@ function extraTime(timer) {
             if (extraTime == 0) {
                 timer.textContent = "Go";
             }
+        } else {
+            clearInterval(extraTimeCountDown);
         }
     }, 1000);
 }
 
 async function timeDivider() {
+    let currentMinutes = new Date().getMinutes();
+    let currentHours = new Date().getHours();
+    let currentTime = currentHours.toString() + ".".concat(currentMinutes);
+    let realTime = parseFloat(currentTime);
     let time = parseInt(totalTime.value);
 
     if (isNaN(time) || time <= 0) {
         alert("Please enter a valid total time.");
+        return;
+    }
+
+    timeJson.map((value) => {
+        if (value[0] <= realTime && realTime <= value[1]) {
+            isUnderTime.push(true);
+        } else {
+            isUnderTime.push(false);
+        }
+    });
+
+    if (!isUnderTime.includes(true)) {
+        yellowLight.forEach((value) => {
+            value.classList.add("yellow");
+        });
         return;
     }
 
@@ -84,81 +142,81 @@ async function timeDivider() {
         }
     }
 
-    timer1 = await setInterval(
-        () => {
-            if (count1 >= 1) {
-                setGreen(lights1, arrow1);
-                setRed(lights2, arrow2);
-                setRed(lights3, arrow3);
-                setRed(lights4, arrow4);
-                time1.textContent = count1;
-                count1--;
-            } else {
-                extraTime(time1);
-                setRed(lights1, arrow1);
-                time1.textContent = "stop";
-                clearInterval(timer1);
-                timer2 = setInterval(
-                    () => {
-                        if (count2 >= 1) {
-                            setGreen(lights2, arrow2);
-                            setRed(lights3, arrow3);
+    timer1 = await setInterval(() => {
+        if (count1 >= 1) {
+            setGreen(lights1, arrow1);
+            setRed(lights2, arrow2);
+            setRed(lights3, arrow3);
+            setRed(lights4, arrow4);
+            time1.textContent = count1;
+            count1--;
+        } else {
+            extraTime(time1);
+            setRed(lights1, arrow1);
+            time1.textContent = "stop";
+            clearInterval(timer1);
+            timer2 = setInterval(() => {
+                if (count2 >= 1) {
+                    setGreen(lights2, arrow2);
+                    setRed(lights3, arrow3);
+                    setRed(lights4, arrow4);
+                    time2.textContent = count2;
+                    count2--;
+                } else {
+                    time2.textContent = "stop";
+
+                    extraTime(time2);
+                    setRed(lights2, arrow2);
+                    clearInterval(timer2);
+
+                    timer3 = setInterval(() => {
+                        if (count3 >= 1) {
+                            setGreen(lights3, arrow3);
                             setRed(lights4, arrow4);
-                            time2.textContent = count2;
-                            count2--;
+                            time3.textContent = count3;
+                            count3--;
                         } else {
-                            time2.textContent = "stop";
+                            time3.textContent = "stop";
 
-                            extraTime(time2);
-                            setRed(lights2, arrow2);
-                            clearInterval(timer2);
+                            extraTime(time3);
+                            setRed(lights3, arrow3);
+                            clearInterval(timer3);
 
-                            timer3 = setInterval(() => {
-                                if (count3 >= 1) {
-                                    setGreen(lights3, arrow3);
-                                    setRed(lights4, arrow4);
-                                    time3.textContent = count3;
-                                    count3--;
+                            timer4 = setInterval(() => {
+                                if (count4 >= 1) {
+                                    setGreen(lights4, arrow4);
+                                    time4.textContent = count4;
+                                    count4--;
                                 } else {
-                                    time3.textContent = "stop";
+                                    time4.textContent = "stop";
 
-                                    extraTime(time3);
-                                    setRed(lights3, arrow3);
-                                    clearInterval(timer3);
-
-                                    timer4 = setInterval(() => {
-                                        if (count4 >= 1) {
-                                            setGreen(lights4, arrow4);
-                                            time4.textContent = count4;
-                                            count4--;
+                                    extraTime(time4);
+                                    setRed(lights4, arrow4);
+                                    clearInterval(timer4);
+                                    if (
+                                        count1 == 0 &&
+                                        count2 == 0 &&
+                                        count3 == 0 &&
+                                        count4 == 0
+                                    ) {
+                                        if (checkTime()) {
+                                            timeDivider();
                                         } else {
-                                            time4.textContent = "stop";
-
-                                            extraTime(time4);
-                                            setRed(lights4, arrow4);
-                                            clearInterval(timer4);
-                                            if (
-                                                count1 == 0 &&
-                                                count2 == 0 &&
-                                                count3 == 0 &&
-                                                count4 == 0
-                                            ) {
-                                                timeDivider();
-                                            }
+                                            allArrow.forEach(value => value.style.color = "white")
+                                            time1.textContent = "Go";
+                                            time2.textContent = "Go";
+                                            time3.textContent = "Go";
+                                            time4.textContent = "Go";
                                         }
-                                    }, 1000);
+                                    }
                                 }
                             }, 1000);
                         }
-                    },
-                    1000,
-                    0
-                );
-            }
-        },
-        1000,
-        0
-    );
+                    }, 1000);
+                }
+            }, 1000);
+        }
+    }, 1000);
 }
 
 function extraTimeForRatio(timer, elapsedTime) {
@@ -168,6 +226,8 @@ function extraTimeForRatio(timer, elapsedTime) {
         if (extraTime > -1) {
             timer.textContent = extraTime;
             extraTime--;
+        } else {
+            clearTimeout(extraTimeCountDown);
         }
         if (extraTime == 0) {
             timer.textContent = "Go";
@@ -181,13 +241,24 @@ async function ratioWIseTimeDivider() {
     let ratioInput = document.querySelectorAll(".ratio");
     let blankInput = [];
     let fillInput = [];
+    let currentMinutes = new Date().getMinutes();
+    let currentHours = new Date().getHours();
+    let currentTime = currentHours.toString() + ".".concat(currentMinutes);
+    let realTime = parseFloat(currentTime);
+    timeJson.map((value) => {
+        if (value[0] <= realTime && realTime <= value[1]) {
+            isUnderTime.push(true);
+        } else {
+            isUnderTime.push(false);
+        }
+    });
 
-    // ratioInput.forEach((value) => {
-    //     if (isNaN(value.value) || value.value <= 0) {
-    //         alert("Please enter a valid total time.");
-    //         return;
-    //     }
-    // })
+    if (!isUnderTime.includes(true)) {
+        yellowLight.forEach((value) => {
+            value.classList.add("yellow");
+        });
+        return;
+    }
 
     ratioInput.forEach((value) => {
         if (value.value != undefined && value.value != "") {
@@ -314,7 +385,15 @@ async function ratioWIseTimeDivider() {
                                         modifyCount3 == 0 &&
                                         modifyCount4 == 0
                                     ) {
-                                        ratioWIseTimeDivider();
+                                        if (checkTime()) {
+                                            ratioWIseTimeDivider();
+                                        } else {
+                                            allArrow.forEach(value => value.style.color = "white")
+                                            time1.textContent = "Go";
+                                            time2.textContent = "Go";
+                                            time3.textContent = "Go";
+                                            time4.textContent = "Go";
+                                        }
                                     }
                                 }
                             }, 1000);

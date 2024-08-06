@@ -18,21 +18,44 @@ body{
 }
 .total > input{
     padding: 8px;
-}
-.total > button{
-    padding: 8px 16px;
+    border: none;
+    outline-color: green;
+    border-radius: 5px;
 }
 
+.total > button{
+    padding: 8px 16px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.total > button:hover{
+    background-color: navy;
+    color: white;
+}
 /* ratio inputs */
 .ratio-inputs{
     padding: 20px;
     text-align: center;
+
 }
 .ratio-inputs > input{
     padding: 8px;
+    border: none;
+    outline-color: red;
+    border-radius: 5px;
 }
 .ratio-inputs > button{
     padding: 8px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.ratio-inputs > button:hover{
+    background-color: navy;
+    color: white;
 }
 .signal{
     display: flex;
@@ -47,6 +70,8 @@ body{
     justify-content: space-around;
     align-items: center;
     font-size: 20px;
+    box-shadow: 0 0 20px rgba(8, 8, 8, 0.508) inset;
+    transition: all 0.3s;
 }
 .light{
     display: flex;
@@ -57,32 +82,80 @@ body{
     gap: 10px;
     background-color: white;
     color: white;
-    padding: 10px;
+    padding: 10px 25px;
     background-color: rgb(20, 20, 20);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.508);
+    
 }
 .ratio{
     width:90px;
 }
 .light-red{
-    background-color: rgb(255, 186, 186);
+    background-color: rgb(254, 212, 212);
 }
 .light-yellow{
-    background-color: rgb(231, 211, 159);
+    background-color: rgb(248, 234, 201);
 }
 .light-green{
-    background-color: rgb(193, 245, 193);
+    background-color: rgb(218, 251, 218);
 }
 .red{
     background-color: red;
+    animation: red 1s infinite;
 }
-
 .green{
     background-color: green;
+    animation: green 1s infinite;
+
 }
 .yellow{
-    background-color: yellow;
+    background-color: rgb(238, 142, 45);
+    animation: yellow 1s infinite;
+
+}
+.arrow{
+    font-weight: 900;
+    font-size: 25px;
+    box-shadow: 0 0 0 rgba(8, 8, 8, 0.508) inset;
+    
 }
 .time-counter{
     text-align: center;
     padding: 8px ;
+}
+
+@keyframes red {
+    
+    0% {
+        opacity: 0.6;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.6;
+    }
+} 
+
+@keyframes green {
+    0% {
+        opacity: 0.6;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.6;
+    }
+}
+@keyframes yellow {
+    0% {
+        opacity: 0.6;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0.6;
+    }
 }
