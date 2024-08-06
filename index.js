@@ -20,7 +20,7 @@ let inputStreet3 = document.querySelector(".input-street-3");
 let inputStreet4 = document.querySelector(".input-street-4");
 let extraTimeCountDown;
 let stop = false;
-let allArrow = document.querySelectorAll(".arrow")
+let allArrow = document.querySelectorAll(".arrow");
 let arrow1 = document.querySelectorAll(".street-1 .arrow");
 let arrow2 = document.querySelectorAll(".street-2 .arrow");
 let arrow3 = document.querySelectorAll(".street-3 .arrow");
@@ -29,8 +29,8 @@ let isUnderTime = [];
 
 let timeJson = [
     [8.0, 11.0], // morning rush
-    [18.0, 21.0], //evening rush
-    [14.0, 17.0],
+    [16.0, 21.0], //evening rush
+    // [14.0, 17.0],
 ];
 function checkTime() {
     let currentMinutes = new Date().getMinutes();
@@ -202,7 +202,11 @@ async function timeDivider() {
                                         if (checkTime()) {
                                             timeDivider();
                                         } else {
-                                            allArrow.forEach(value => value.style.color = "white")
+                                            allArrow.forEach(
+                                                (value) =>
+                                                    (value.style.color =
+                                                        "white")
+                                            );
                                             time1.textContent = "Go";
                                             time2.textContent = "Go";
                                             time3.textContent = "Go";
@@ -388,7 +392,11 @@ async function ratioWIseTimeDivider() {
                                         if (checkTime()) {
                                             ratioWIseTimeDivider();
                                         } else {
-                                            allArrow.forEach(value => value.style.color = "white")
+                                            allArrow.forEach(
+                                                (value) =>
+                                                    (value.style.color =
+                                                        "white")
+                                            );
                                             time1.textContent = "Go";
                                             time2.textContent = "Go";
                                             time3.textContent = "Go";
