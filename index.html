@@ -1,63 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>Traffic signal</title>
-</head>
-<body>
-    <div class="total">
-        <input type="text" class="total-time" placeholder="Enter total time in seconds">
-        <button onclick="timeDivider()">Start</button>
-    </div>
-    <div class="ratio-inputs">
-        <input type="text" class="input-street-1 ratio" placeholder="North">
-      <input type="text" class="input-street-2 ratio" placeholder="East">
-        <input type="text" class="input-street-3 ratio" placeholder="South">
-        <input type="text" class="input-street-4 ratio" placeholder="West">
-        <button onclick="ratioWIseTimeDivider()">Apply & Start</button>
-    </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="index.css" />
+        <title>Traffic signal</title>
+    </head>
+    <body>
+        <div class="total">
+            <input
+                type="text"
+                class="total-time"
+                placeholder="Enter total time in seconds"
+            />
+            <button onclick="timeDivider()">Start</button>
+        </div>
+        <div class="ratio-inputs">
+            <input
+                type="text"
+                class="input-street-1 ratio"
+                placeholder="North in %"
+            />
+            <input
+                type="text"
+                class="input-street-2 ratio"
+                placeholder="East in %"
+            />
+            <input
+                type="text"
+                class="input-street-3 ratio"
+                placeholder="South in %"
+            />
+            <input
+                type="text"
+                class="input-street-4 ratio"
+                placeholder="West in %"
+            />
+            <button onclick="ratioWIseTimeDivider()">Apply & Start</button>
+        </div>
 
-    <div class="signal">
-        <div class="street-1 light">
-            <div class="time-1 time-counter">stop</div>
-            <div class="light-red box"></div>
-            <div class="light-yellow box"></div>
-            <div class="light-green box"></div>
-            <div class="arrow up box">&#8593;</div>
-            <div class="arrow left box">&#8592;</div>
-            <div class="arrow right box">&#8594;</div>
+        <div class="signal">
+            <div class="street-1 light">
+                <div class="time-1 time-counter">stop</div>
+                <div class="light-red box"></div>
+                <div class="light-yellow box"></div>
+                <div class="light-green box"></div>
+                <div class="arrow up box">&#8593;</div>
+                <div class="arrow left box">&#8592;</div>
+                <div class="arrow right box">&#8594;</div>
+            </div>
+            <div class="street-2 light">
+                <div class="time-2 time-counter">stop</div>
+                <div class="light-red box"></div>
+                <div class="light-yellow box"></div>
+                <div class="light-green box"></div>
+                <div class="arrow up box">&#8593;</div>
+                <div class="arrow left box">&#8592;</div>
+                <div class="arrow right box">&#8594;</div>
+            </div>
+            <div class="street-3 light">
+                <div class="time-3 time-counter">stop</div>
+                <div class="light-red box"></div>
+                <div class="light-yellow box"></div>
+                <div class="light-green box"></div>
+                <div class="arrow up box">&#8593;</div>
+                <div class="arrow left box">&#8592;</div>
+                <div class="arrow right box">&#8594;</div>
+            </div>
+            <div class="street-4 light">
+                <div class="time-4 time-counter">stop</div>
+                <div class="light-red box"></div>
+                <div class="light-yellow box"></div>
+                <div class="light-green box"></div>
+                <div class="arrow up box">&#8593;</div>
+                <div class="arrow left box">&#8592;</div>
+                <div class="arrow right box">&#8594;</div>
+            </div>
         </div>
-        <div class="street-2 light">
-            <div class="time-2 time-counter ">stop</div>
-            <div class="light-red box"></div>
-            <div class="light-yellow box"></div>
-            <div class="light-green box"></div>
-            <div class="arrow up box">&#8593;</div>
-            <div class="arrow left box">&#8592;</div>
-            <div class="arrow right box">&#8594;</div>
-        </div>
-        <div class="street-3 light">
-            <div class="time-3 time-counter ">stop</div>
-            <div class=" light-red box"></div>
-            <div class=" light-yellow box"></div>
-            <div class=" light-green box"></div>
-            <div class="arrow up box">&#8593;</div>
-            <div class="arrow left box">&#8592;</div>
-            <div class="arrow right box">&#8594;</div>
-        </div>
-        <div class="street-4 light">
-            <div class="time-4 time-counter ">stop</div>
-            <div class="light-red box"></div>
-            <div class="light-yellow box"></div>
-            <div class="light-green box"></div>
-            <div class="arrow up box">&#8593;</div>
-            <div class="arrow left box">&#8592;</div>
-            <div class="arrow right box">&#8594;</div>
-        </div>
-    </div>
-    
-</body>
-<script src="index.js"></script>
+    </body>
+    <script src="index.js"></script>
 </html>

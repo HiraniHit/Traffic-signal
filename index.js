@@ -46,7 +46,6 @@ function checkTime() {
             isUnderTime.push(false);
         }
     });
-    console.log(isUnderTime);
 
     if (!isUnderTime.includes(true)) {
         yellowLight.forEach((value) => {
@@ -65,6 +64,8 @@ function extraTime(timer) {
     let time = parseInt(totalTime.value);
 
     let extraTime = time - Math.floor(time / 4) + 3;
+    console.log(extraTime);
+
     extraTimeCountDown = setInterval(() => {
         if (extraTime > -1) {
             timer.textContent = extraTime;
@@ -72,8 +73,6 @@ function extraTime(timer) {
             if (extraTime == 0) {
                 timer.textContent = "Go";
             }
-        } else {
-            clearInterval(extraTimeCountDown);
         }
     }, 1000);
 }
@@ -151,9 +150,11 @@ async function timeDivider() {
             time1.textContent = count1;
             count1--;
         } else {
-            extraTime(time1);
             setRed(lights1, arrow1);
             time1.textContent = "stop";
+            extraTime(time1);
+            console.log(time1);
+
             clearInterval(timer1);
             timer2 = setInterval(() => {
                 if (count2 >= 1) {
@@ -164,11 +165,9 @@ async function timeDivider() {
                     count2--;
                 } else {
                     time2.textContent = "stop";
-
                     extraTime(time2);
                     setRed(lights2, arrow2);
                     clearInterval(timer2);
-
                     timer3 = setInterval(() => {
                         if (count3 >= 1) {
                             setGreen(lights3, arrow3);
@@ -230,8 +229,6 @@ function extraTimeForRatio(timer, elapsedTime) {
         if (extraTime > -1) {
             timer.textContent = extraTime;
             extraTime--;
-        } else {
-            clearTimeout(extraTimeCountDown);
         }
         if (extraTime == 0) {
             timer.textContent = "Go";
@@ -249,6 +246,7 @@ async function ratioWIseTimeDivider() {
     let currentHours = new Date().getHours();
     let currentTime = currentHours.toString() + ".".concat(currentMinutes);
     let realTime = parseFloat(currentTime);
+
     timeJson.map((value) => {
         if (value[0] <= realTime && realTime <= value[1]) {
             isUnderTime.push(true);
@@ -279,22 +277,22 @@ async function ratioWIseTimeDivider() {
     let obtainTime = time / (100 / ratioCount);
 
     let modifyCount1 =
-        time / (100 / parseInt(inputStreet1.value)) ||
+        Math.ceil(time / (100 / parseInt(inputStreet1.value))) ||
         Math.floor((time - obtainTime) / blankInput.length);
     let modifyCount2 =
-        time / (100 / parseInt(inputStreet2.value)) ||
+        Math.ceil(time / (100 / parseInt(inputStreet2.value))) ||
         Math.floor((time - obtainTime) / blankInput.length);
     let modifyCount3 =
-        time / (100 / parseInt(inputStreet3.value)) ||
+        Math.ceil(time / (100 / parseInt(inputStreet3.value))) ||
         Math.floor((time - obtainTime) / blankInput.length);
     let modifyCount4 =
-        time / (100 / parseInt(inputStreet4.value)) ||
+        Math.ceil(time / (100 / parseInt(inputStreet4.value))) ||
         Math.floor((time - obtainTime) / blankInput.length);
 
-    let remainingTime1 = time - modifyCount1;
-    let remainingTime2 = time - modifyCount2;
-    let remainingTime3 = time - modifyCount3;
-    let remainingTime4 = time - modifyCount4;
+    let remainingTime1 = time - Math.floor(modifyCount1);
+    let remainingTime2 = time - Math.floor(modifyCount2);
+    let remainingTime3 = time - Math.floor(modifyCount3);
+    let remainingTime4 = time - Math.floor(modifyCount4);
 
     if (isNaN(time) || time <= 0) {
         alert("Please enter a valid total time.");
