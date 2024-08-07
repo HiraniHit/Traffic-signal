@@ -27,20 +27,18 @@ let arrow1 = document.querySelectorAll(".street-1 .arrow");
 let arrow2 = document.querySelectorAll(".street-2 .arrow");
 let arrow3 = document.querySelectorAll(".street-3 .arrow");
 let arrow4 = document.querySelectorAll(".street-4 .arrow");
-let lightRed = document.querySelectorAll(".light-red")
-let lightGreen = document.querySelectorAll(".light-green")
+let lightRed = document.querySelectorAll(".light-red");
+let lightGreen = document.querySelectorAll(".light-green");
 let isUnderTime = [];
 
 let timeJson = [
     ["08:00", "12:07"], // morning rush
-    ["15:00", "21:00"], //evening rush
+    ["18:00", "21:00"], //evening rush
     // ["14:00", "14:58"], //demo
-    // ["15:05", "15:18"], //demo
-    // ["15:20", "15:30"], //demo
-
+    ["17:05", "17:10"], //demo
+    ["17:12", "17:58"], //demo
 ];
-// FIXME: JSON timing
-// TODO: give a proper css and make original look
+// FIXME: light after turn off the lights
 // TODO: make website view
 
 setInterval(() => {
@@ -70,12 +68,13 @@ function checkTime() {
         yellowLight.forEach((value) => {
             value.classList.add("yellow");
         });
-        lightGreen.forEach(value => {
-            value.classList.remove("green")
-        })
-        lightRed.forEach(value => {
-            value.classList.remove("red")
-        })
+        allArrow.forEach(item => item.style.color ="white")
+        lightGreen.forEach((value) => {
+                value.classList.remove("green");
+        });
+        lightRed.forEach((value) => {
+            value.classList.remove("red");
+        });
 
         redLite.forEach((value) => value.classList.remove("red"));
         timeDisplay.forEach((value, i) => {
@@ -98,6 +97,15 @@ function checkTime() {
                 value.style.opacity = "1";
             });
             timeDivider();
+        }
+        if (
+            light.classList.contains("yellow") &&
+            light.classList.contains("continue1")
+        ) {
+            timeDisplay.forEach((value) => {
+                value.style.opacity = "1";
+            });
+            ratioWIseTimeDivider();
         }
         return true;
     }
@@ -242,7 +250,6 @@ async function timeDivider() {
                                                     "continue"
                                                 )
                                             );
-
                                             timeDivider();
                                         } else {
                                             allArrow.forEach(
@@ -277,6 +284,7 @@ function extraTimeForRatio(timer, elapsedTime) {
 }
 
 async function ratioWIseTimeDivider() {
+    yellowLight.forEach((value) => value.classList.add("continue1"));
     yellowLight.forEach((value) => {
         value.classList.remove("yellow");
     });
@@ -324,11 +332,7 @@ async function ratioWIseTimeDivider() {
             blankInput.push(value);
         }
     });
-    console.log(ratioCount);
-    console.log("fill", fillInput.length);
-    console.log("blank", blankInput.length);
     let obtainTime = time / (100 / ratioCount);
-
     let modifyCount1 =
         Math.ceil(time / (100 / parseInt(inputStreet1.value))) ||
         Math.floor((time - obtainTime) / blankInput.length);
@@ -365,9 +369,7 @@ async function ratioWIseTimeDivider() {
                 value.style.color = "white";
             });
         }
-        if (text) {
-            text.style.color = "green";
-        }
+        if (text) text.style.color = "green";
     }
 
     function setRed(lights, arrow, text) {
@@ -385,9 +387,7 @@ async function ratioWIseTimeDivider() {
                 }
             });
         }
-        if (text) {
-            text.style.color = "red";
-        }
+        if (text) text.style.color = "red";
     }
 
     timer1 = await setInterval(() => {
@@ -446,7 +446,12 @@ async function ratioWIseTimeDivider() {
                                         modifyCount3 == 0 &&
                                         modifyCount4 == 0
                                     ) {
-                                        if (checkTime()) {
+                                        if (stop) {
+                                            yellowLight.forEach((value) =>
+                                                value.classList.remove(
+                                                    "continue1"
+                                                )
+                                            );
                                             ratioWIseTimeDivider();
                                         } else {
                                             allArrow.forEach(
@@ -454,10 +459,6 @@ async function ratioWIseTimeDivider() {
                                                     (value.style.color =
                                                         "white")
                                             );
-                                            time1.textContent = "Go";
-                                            time2.textContent = "Go";
-                                            time3.textContent = "Go";
-                                            time4.textContent = "Go";
                                         }
                                     }
                                 }
