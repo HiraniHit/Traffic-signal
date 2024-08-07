@@ -4,12 +4,39 @@
     box-sizing: border-box;
 }
 body {
-    height: 100vh;
+    width: 100vw;
+}
+
+nav {
+    background-color: rgb(2, 13, 88);
+    color: white;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+}
+ul {
+    display: flex;
+    gap: 20px;
+}
+li {
+    text-decoration: none;
+    list-style: none;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.testing {
+    padding: 80px 0;
+    width: 100vw;
     background-image: url(./img/road.jpg);
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
-
 /* total time */
 .total {
     text-align: center;
@@ -40,6 +67,7 @@ body {
     text-align: center;
 }
 .ratio-inputs > input {
+    width: 150px;
     padding: 8px;
     border: none;
     outline-color: red;
@@ -102,13 +130,47 @@ body {
     background-color: red;
     animation: red 1s infinite;
 }
+@keyframes red {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
 .green {
     background-color: green;
     animation: green 1s infinite;
 }
+
+@keyframes yellow {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
+}
 .yellow {
     background-color: rgb(238, 142, 45);
     animation: yellow 1s infinite;
+}
+@keyframes green {
+    0% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.6;
+    }
 }
 .arrow {
     font-weight: 900;
@@ -165,40 +227,13 @@ body {
     }
 }
 .time-counter {
+    color: black;
     text-align: center;
+    margin: 15px 0 10px 0;
+    width: 100%;
+    border-radius: 12px;
+    font-size: 18px;
     padding: 8px;
-}
-@keyframes red {
-    0% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.6;
-    }
-}
-
-@keyframes green {
-    0% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.6;
-    }
-}
-@keyframes yellow {
-    0% {
-        opacity: 0.6;
-    }
-    50% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0.6;
-    }
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.499) inset;
 }

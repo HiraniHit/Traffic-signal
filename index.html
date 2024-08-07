@@ -3,81 +3,101 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+        <link
+            rel="shortcut icon"
+            href="./img/favicon.png"
+            type="image/x-icon"
+        />
         <link rel="stylesheet" href="index.css" />
         <title>Traffic signal</title>
     </head>
     <body>
-        <div class="total">
-            <input
-                type="text"
-                class="total-time"
-                placeholder="Enter total time in seconds"
-            />
-            <button onclick="timeDivider()">Start</button>
-        </div>
-        <div class="ratio-inputs">
-            <input
-                type="text"
-                class="input-street-1 ratio"
-                placeholder="North in %"
-            />
-            <input
-                type="text"
-                class="input-street-2 ratio"
-                placeholder="East in %"
-            />
-            <input
-                type="text"
-                class="input-street-3 ratio"
-                placeholder="South in %"
-            />
-            <input
-                type="text"
-                class="input-street-4 ratio"
-                placeholder="West in %"
-            />
-            <button onclick="ratioWIseTimeDivider()">Apply & Start</button>
-        </div>
+        <nav>
+            <div class="logo">
+                <img src="./img/favicon.png" alt="" width="30">
+                <span>trafficano</span>
+            </div>
+            <div>Welcome to our website</div>
+            <ul>
+                <li>Home</li>
+                <li>Info</li>
+                <li>Contact Us</li>
+            </ul>
+        </nav>
 
-        <div class="signal">
-            <div class="street-1 light">
-                <div class="time-1 time-counter">stop</div>
-                <div class="light-red box"></div>
-                <div class="light-yellow box"></div>
-                <div class="light-green box"></div>
-                <div class="arrow up box">&#8593;</div>
-                <div class="arrow left box">&#8592;</div>
-                <div class="arrow right box">&#8594;</div>
+        <section class="testing">
+            <div class="total">
+                <input
+                    type="text"
+                    class="total-time"
+                    placeholder="Enter total time in seconds"
+                />
+                <button onclick="timeDivider()">Start</button>
             </div>
-            <div class="street-2 light">
-                <div class="time-2 time-counter">stop</div>
-                <div class="light-red box"></div>
-                <div class="light-yellow box"></div>
-                <div class="light-green box"></div>
-                <div class="arrow up box">&#8593;</div>
-                <div class="arrow left box">&#8592;</div>
-                <div class="arrow right box">&#8594;</div>
+            <div class="ratio-inputs">
+                <input
+                    type="text"
+                    class="input-street-1 ratio"
+                    placeholder="North in %"
+                />
+                <input
+                    type="text"
+                    class="input-street-2 ratio"
+                    placeholder="East in %"
+                />
+                <input
+                    type="text"
+                    class="input-street-3 ratio"
+                    placeholder="South in %"
+                />
+                <input
+                    type="text"
+                    class="input-street-4 ratio"
+                    placeholder="West in %"
+                />
+                <button onclick="ratioWIseTimeDivider()">Apply & Start</button>
             </div>
-            <div class="street-3 light">
-                <div class="time-3 time-counter">stop</div>
-                <div class="light-red box"></div>
-                <div class="light-yellow box"></div>
-                <div class="light-green box"></div>
-                <div class="arrow up box">&#8593;</div>
-                <div class="arrow left box">&#8592;</div>
-                <div class="arrow right box">&#8594;</div>
+
+            <div class="signal">
+                <div class="street-1 light">
+                    <div class="time-1 time-counter">Go</div>
+                    <div class="light-red box"></div>
+                    <div class="yellow light-yellow box"></div>
+                    <div class="light-green box"></div>
+                    <div class="arrow up box">&#8593;</div>
+                    <div class="arrow left box">&#8592;</div>
+                    <div class="arrow right box">&#8594;</div>
+                </div>
+                <div class="street-2 light">
+                    <div class="time-2 time-counter">Go</div>
+                    <div class="light-red box"></div>
+                    <div class="yellow light-yellow box"></div>
+                    <div class="light-green box"></div>
+                    <div class="arrow up box">&#8593;</div>
+                    <div class="arrow left box">&#8592;</div>
+                    <div class="arrow right box">&#8594;</div>
+                </div>
+                <div class="street-3 light">
+                    <div class="time-3 time-counter">Go</div>
+                    <div class="light-red box"></div>
+                    <div class="yellow light-yellow box"></div>
+                    <div class="light-green box"></div>
+                    <div class="arrow up box">&#8593;</div>
+                    <div class="arrow left box">&#8592;</div>
+                    <div class="arrow right box">&#8594;</div>
+                </div>
+                <div class="street-4 light">
+                    <div class="time-4 time-counter">Go</div>
+                    <div class="light-red box"></div>
+                    <div class="yellow light-yellow box"></div>
+                    <div class="light-green box"></div>
+                    <div class="arrow up box">&#8593;</div>
+                    <div class="arrow left box">&#8592;</div>
+                    <div class="arrow right box">&#8594;</div>
+                </div>
             </div>
-            <div class="street-4 light">
-                <div class="time-4 time-counter">stop</div>
-                <div class="light-red box"></div>
-                <div class="light-yellow box"></div>
-                <div class="light-green box"></div>
-                <div class="arrow up box">&#8593;</div>
-                <div class="arrow left box">&#8592;</div>
-                <div class="arrow right box">&#8594;</div>
-            </div>
-        </div>
+        </section>
     </body>
     <script src="index.js"></script>
+    <!-- <script src="test.js"></script> -->
 </html>

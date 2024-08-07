@@ -19,7 +19,7 @@ let inputStreet2 = document.querySelector(".input-street-2");
 let inputStreet3 = document.querySelector(".input-street-3");
 let inputStreet4 = document.querySelector(".input-street-4");
 let extraTimeCountDown;
-let stop = false;
+let stop ;
 let allArrow = document.querySelectorAll(".arrow");
 let arrow1 = document.querySelectorAll(".street-1 .arrow");
 let arrow2 = document.querySelectorAll(".street-2 .arrow");
@@ -28,24 +28,33 @@ let arrow4 = document.querySelectorAll(".street-4 .arrow");
 let isUnderTime = [];
 
 let timeJson = [
-    [8.0, 11.0], // morning rush
-    [16.0, 21.0], //evening rush
-    // [14.0, 17.0],
+    ["08:00", "12:07"], // morning rush
+    ["16:00", "21:00"], //evening rush
+    ["13:30", "13:54"],
 ];
+// FIXME: JSON timing
+// TODO: give a proper css and make original look
+// TODO: make website view
+
 function checkTime() {
+
     let currentMinutes = new Date().getMinutes();
     let currentHours = new Date().getHours();
-    let currentTime = currentHours.toString() + ".".concat(currentMinutes);
-    let realTime = parseFloat(currentTime);
+    let minutes = currentMinutes.toString().padStart(2, "0");
+    let hours = currentHours.toString();
     isUnderTime = [];
 
+    let currentTime = hours.toString() + ":".concat(minutes);
+
     timeJson.map((value) => {
-        if (value[0] <= realTime && realTime <= value[1]) {
+        if (value[0] <= currentTime && currentTime <= value[1]) {
             isUnderTime.push(true);
         } else {
             isUnderTime.push(false);
         }
     });
+
+    console.log(isUnderTime);
 
     if (!isUnderTime.includes(true)) {
         yellowLight.forEach((value) => {
@@ -53,17 +62,20 @@ function checkTime() {
         });
         let redLite = document.querySelectorAll(".red");
         redLite.forEach((value) => value.classList.remove("red"));
+        timeDisplay.forEach((value) => (value.textContent = "Go"));
 
         return false;
     } else {
+
         return true;
     }
 }
 
 function extraTime(timer) {
     let time = parseInt(totalTime.value);
+    let realTime = Math.floor(time / 4) * 4;
 
-    let extraTime = time - Math.floor(time / 4) + 3;
+    let extraTime = realTime - Math.floor(time / 4) + 3;
     console.log(extraTime);
 
     extraTimeCountDown = setInterval(() => {
@@ -78,10 +90,13 @@ function extraTime(timer) {
 }
 
 async function timeDivider() {
-    let currentMinutes = new Date().getMinutes();
-    let currentHours = new Date().getHours();
-    let currentTime = currentHours.toString() + ".".concat(currentMinutes);
-    let realTime = parseFloat(currentTime);
+    yellowLight.forEach((value) => {
+        value.classList.remove("yellow");
+    });
+    timeDisplay.forEach((value) => {
+        value.textContent = "Stop";
+    });
+    time1.textContent = "Go";
     let time = parseInt(totalTime.value);
 
     if (isNaN(time) || time <= 0) {
@@ -89,27 +104,16 @@ async function timeDivider() {
         return;
     }
 
-    timeJson.map((value) => {
-        if (value[0] <= realTime && realTime <= value[1]) {
-            isUnderTime.push(true);
-        } else {
-            isUnderTime.push(false);
-        }
-    });
-
-    if (!isUnderTime.includes(true)) {
-        yellowLight.forEach((value) => {
-            value.classList.add("yellow");
-        });
-        return;
-    }
+if(!(checkTime())){
+    return;
+}
 
     let count1 = Math.floor(time / 4);
     let count2 = Math.floor(time / 4);
     let count3 = Math.floor(time / 4);
     let count4 = Math.floor(time / 4);
 
-    function setGreen(lights, arrow) {
+    function setGreen(lights, arrow, text) {
         lights.forEach((light) => {
             if (light.classList.contains("light-green")) {
                 light.classList.add("green");
@@ -122,9 +126,13 @@ async function timeDivider() {
                 value.style.color = "white";
             });
         }
+
+        if (text) {
+            text.style.color = "green";
+        }
     }
 
-    function setRed(lights, arrow) {
+    function setRed(lights, arrow, text) {
         lights.forEach((light) => {
             if (light.classList.contains("light-red")) {
                 light.classList.add("red");
@@ -139,58 +147,56 @@ async function timeDivider() {
                 }
             });
         }
+        if (text) {
+            text.style.color = "red";
+        }
     }
 
     timer1 = await setInterval(() => {
         if (count1 >= 1) {
-            setGreen(lights1, arrow1);
-            setRed(lights2, arrow2);
-            setRed(lights3, arrow3);
-            setRed(lights4, arrow4);
+            setGreen(lights1, arrow1, time1);
+            setRed(lights2, arrow2, time2);
+            setRed(lights3, arrow3, time3);
+            setRed(lights4, arrow4, time4);
             time1.textContent = count1;
             count1--;
         } else {
-            setRed(lights1, arrow1);
+            setRed(lights1, arrow1, time1);
             time1.textContent = "stop";
             extraTime(time1);
-            console.log(time1);
-
             clearInterval(timer1);
             timer2 = setInterval(() => {
                 if (count2 >= 1) {
-                    setGreen(lights2, arrow2);
-                    setRed(lights3, arrow3);
-                    setRed(lights4, arrow4);
+                    setGreen(lights2, arrow2, time2);
+                    setRed(lights3, arrow3, time3);
+                    setRed(lights4, arrow4, time4);
                     time2.textContent = count2;
                     count2--;
                 } else {
                     time2.textContent = "stop";
                     extraTime(time2);
-                    setRed(lights2, arrow2);
+                    setRed(lights2, arrow2, time2);
                     clearInterval(timer2);
                     timer3 = setInterval(() => {
                         if (count3 >= 1) {
-                            setGreen(lights3, arrow3);
-                            setRed(lights4, arrow4);
+                            setGreen(lights3, arrow3, time3);
+                            setRed(lights4, arrow4, time4);
                             time3.textContent = count3;
                             count3--;
                         } else {
                             time3.textContent = "stop";
-
                             extraTime(time3);
-                            setRed(lights3, arrow3);
+                            setRed(lights3, arrow3, time3);
                             clearInterval(timer3);
-
                             timer4 = setInterval(() => {
                                 if (count4 >= 1) {
-                                    setGreen(lights4, arrow4);
+                                    setGreen(lights4, arrow4, time4);
                                     time4.textContent = count4;
                                     count4--;
                                 } else {
                                     time4.textContent = "stop";
-
                                     extraTime(time4);
-                                    setRed(lights4, arrow4);
+                                    setRed(lights4, arrow4, time4);
                                     clearInterval(timer4);
                                     if (
                                         count1 == 0 &&
@@ -206,10 +212,6 @@ async function timeDivider() {
                                                     (value.style.color =
                                                         "white")
                                             );
-                                            time1.textContent = "Go";
-                                            time2.textContent = "Go";
-                                            time3.textContent = "Go";
-                                            time4.textContent = "Go";
                                         }
                                     }
                                 }
@@ -237,6 +239,13 @@ function extraTimeForRatio(timer, elapsedTime) {
 }
 
 async function ratioWIseTimeDivider() {
+    yellowLight.forEach((value) => {
+        value.classList.remove("yellow");
+    });
+    timeDisplay.forEach((value) => {
+        value.textContent = "Stop";
+    });
+    time1.textContent = "Go";
     let time = parseInt(totalTime.value);
     let ratioCount = null;
     let ratioInput = document.querySelectorAll(".ratio");
@@ -244,11 +253,14 @@ async function ratioWIseTimeDivider() {
     let fillInput = [];
     let currentMinutes = new Date().getMinutes();
     let currentHours = new Date().getHours();
-    let currentTime = currentHours.toString() + ".".concat(currentMinutes);
-    let realTime = parseFloat(currentTime);
+    let minutes = currentMinutes.toString().padStart(2, "0");
+    let hours = currentHours.toString();
+    isUnderTime = [];
+
+    let currentTime = hours.toString() + ":".concat(minutes);
 
     timeJson.map((value) => {
-        if (value[0] <= realTime && realTime <= value[1]) {
+        if (value[0] <= currentTime && currentTime <= value[1]) {
             isUnderTime.push(true);
         } else {
             isUnderTime.push(false);
@@ -259,6 +271,9 @@ async function ratioWIseTimeDivider() {
         yellowLight.forEach((value) => {
             value.classList.add("yellow");
         });
+        let redLite = document.querySelectorAll(".red");
+        redLite.forEach((value) => value.classList.remove("red"));
+        timeDisplay.forEach((value) => (value.textContent = "Go"));
         return;
     }
 
@@ -299,7 +314,7 @@ async function ratioWIseTimeDivider() {
         return;
     }
 
-    function setGreen(lights, arrow) {
+    function setGreen(lights, arrow, text) {
         lights.forEach((light) => {
             if (light.classList.contains("light-green")) {
                 light.classList.add("green");
@@ -312,9 +327,12 @@ async function ratioWIseTimeDivider() {
                 value.style.color = "white";
             });
         }
+        if (text) {
+            text.style.color = "green";
+        }
     }
 
-    function setRed(lights, arrow) {
+    function setRed(lights, arrow, text) {
         lights.forEach((light) => {
             if (light.classList.contains("light-red")) {
                 light.classList.add("red");
@@ -329,57 +347,60 @@ async function ratioWIseTimeDivider() {
                 }
             });
         }
+        if (text) {
+            text.style.color = "red";
+        }
     }
 
     timer1 = await setInterval(() => {
         if (modifyCount1 >= 1) {
-            setGreen(lights1, arrow1);
-            setRed(lights2, arrow2);
-            setRed(lights3, arrow3);
-            setRed(lights4, arrow4);
+            setGreen(lights1, arrow1, time1);
+            setRed(lights2, arrow2, time2);
+            setRed(lights3, arrow3, time3);
+            setRed(lights4, arrow4, time4);
             time1.textContent = modifyCount1;
             modifyCount1--;
         } else {
             console.log(modifyCount1);
             time1.textContent = "stop";
             extraTimeForRatio(time1, remainingTime1);
-            setRed(lights1, arrow1);
+            setRed(lights1, arrow1, time1);
             clearInterval(timer1);
             timer2 = setInterval(() => {
                 if (modifyCount2 >= 1) {
-                    setGreen(lights2, arrow2);
-                    setRed(lights3, arrow3);
-                    setRed(lights4, arrow4);
+                    setGreen(lights2, arrow2, time2);
+                    setRed(lights3, arrow3, time3);
+                    setRed(lights4, arrow4, time4);
                     time2.textContent = modifyCount2;
                     modifyCount2--;
                 } else {
                     console.log(modifyCount2);
                     time2.textContent = "stop";
                     extraTimeForRatio(time2, remainingTime2);
-                    setRed(lights2, arrow2);
+                    setRed(lights2, arrow2, time2);
                     clearInterval(timer2);
                     timer3 = setInterval(() => {
                         if (modifyCount3 >= 1) {
-                            setGreen(lights3, arrow3);
-                            setRed(lights4, arrow4);
+                            setGreen(lights3, arrow3, time3);
+                            setRed(lights4, arrow4, time4);
                             time3.textContent = modifyCount3;
                             modifyCount3--;
                         } else {
                             console.log(modifyCount3);
                             extraTimeForRatio(time3, remainingTime3);
                             time3.textContent = "stop";
-                            setRed(lights3, arrow3);
+                            setRed(lights3, arrow3, time3);
                             clearInterval(timer3);
                             timer4 = setInterval(() => {
                                 if (modifyCount4 >= 1) {
-                                    setGreen(lights4, arrow4);
+                                    setGreen(lights4, arrow4, time4);
                                     time4.textContent = modifyCount4;
                                     modifyCount4--;
                                 } else {
                                     console.log(modifyCount4);
                                     extraTimeForRatio(time4, remainingTime4);
                                     time4.textContent = "stop";
-                                    setRed(lights4, arrow4);
+                                    setRed(lights4, arrow4, time4);
                                     clearInterval(timer4);
                                     if (
                                         modifyCount1 == 0 &&
