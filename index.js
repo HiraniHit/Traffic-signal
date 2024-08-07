@@ -13,31 +13,41 @@ let lights1 = document.querySelectorAll(".street-1 .box");
 let lights2 = document.querySelectorAll(".street-2 .box");
 let lights3 = document.querySelectorAll(".street-3 .box");
 let lights4 = document.querySelectorAll(".street-4 .box");
+let redLite = document.querySelectorAll(".light-red");
 let yellowLight = document.querySelectorAll(`.light-yellow`);
 let inputStreet1 = document.querySelector(".input-street-1");
 let inputStreet2 = document.querySelector(".input-street-2");
 let inputStreet3 = document.querySelector(".input-street-3");
 let inputStreet4 = document.querySelector(".input-street-4");
 let extraTimeCountDown;
-let stop ;
+let start;
+let stop;
 let allArrow = document.querySelectorAll(".arrow");
 let arrow1 = document.querySelectorAll(".street-1 .arrow");
 let arrow2 = document.querySelectorAll(".street-2 .arrow");
 let arrow3 = document.querySelectorAll(".street-3 .arrow");
 let arrow4 = document.querySelectorAll(".street-4 .arrow");
+let lightRed = document.querySelectorAll(".light-red")
+let lightGreen = document.querySelectorAll(".light-green")
 let isUnderTime = [];
 
 let timeJson = [
     ["08:00", "12:07"], // morning rush
-    ["16:00", "21:00"], //evening rush
-    ["13:30", "13:54"],
+    ["15:00", "21:00"], //evening rush
+    // ["14:00", "14:58"], //demo
+    // ["15:05", "15:18"], //demo
+    // ["15:20", "15:30"], //demo
+
 ];
 // FIXME: JSON timing
 // TODO: give a proper css and make original look
 // TODO: make website view
 
-function checkTime() {
+setInterval(() => {
+    checkTime();
+}, 1000);
 
+function checkTime() {
     let currentMinutes = new Date().getMinutes();
     let currentHours = new Date().getHours();
     let minutes = currentMinutes.toString().padStart(2, "0");
@@ -60,13 +70,35 @@ function checkTime() {
         yellowLight.forEach((value) => {
             value.classList.add("yellow");
         });
-        let redLite = document.querySelectorAll(".red");
-        redLite.forEach((value) => value.classList.remove("red"));
-        timeDisplay.forEach((value) => (value.textContent = "Go"));
+        lightGreen.forEach(value => {
+            value.classList.remove("green")
+        })
+        lightRed.forEach(value => {
+            value.classList.remove("red")
+        })
 
+        redLite.forEach((value) => value.classList.remove("red"));
+        timeDisplay.forEach((value, i) => {
+            value.textContent = "Go";
+            value.style.opacity = "0";
+        });
+
+        stop = false;
         return false;
     } else {
+        stop = true;
 
+        let light = document.querySelector(".light-yellow");
+
+        if (
+            light.classList.contains("yellow") &&
+            light.classList.contains("continue")
+        ) {
+            timeDisplay.forEach((value) => {
+                value.style.opacity = "1";
+            });
+            timeDivider();
+        }
         return true;
     }
 }
@@ -76,7 +108,6 @@ function extraTime(timer) {
     let realTime = Math.floor(time / 4) * 4;
 
     let extraTime = realTime - Math.floor(time / 4) + 3;
-    console.log(extraTime);
 
     extraTimeCountDown = setInterval(() => {
         if (extraTime > -1) {
@@ -90,6 +121,7 @@ function extraTime(timer) {
 }
 
 async function timeDivider() {
+    start = false;
     yellowLight.forEach((value) => {
         value.classList.remove("yellow");
     });
@@ -104,10 +136,10 @@ async function timeDivider() {
         return;
     }
 
-if(!(checkTime())){
-    return;
-}
-
+    if (!checkTime()) {
+        return;
+    }
+    yellowLight.forEach((value) => value.classList.add("continue"));
     let count1 = Math.floor(time / 4);
     let count2 = Math.floor(time / 4);
     let count3 = Math.floor(time / 4);
@@ -204,7 +236,13 @@ if(!(checkTime())){
                                         count3 == 0 &&
                                         count4 == 0
                                     ) {
-                                        if (checkTime()) {
+                                        if (stop) {
+                                            yellowLight.forEach((value) =>
+                                                value.classList.remove(
+                                                    "continue"
+                                                )
+                                            );
+
                                             timeDivider();
                                         } else {
                                             allArrow.forEach(
