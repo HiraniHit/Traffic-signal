@@ -3,14 +3,21 @@
     padding: 0;
     box-sizing: border-box;
 }
+html {
+    scroll-behavior: smooth;
+}
 body {
     width: 100vw;
+    overflow-x: hidden;
 }
-
+button{
+    cursor: pointer;
+}
 nav {
+    width: 100%;
     background-color: rgb(2, 13, 88);
     color: white;
-    padding: 25px;
+    padding: 25px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,6 +30,7 @@ ul {
 li {
     text-decoration: none;
     list-style: none;
+    cursor: pointer;
 }
 .logo {
     display: flex;
@@ -35,7 +43,7 @@ li {
 }
 .testing {
     padding: 80px 0;
-    width: 100vw;
+    width: 100%;
     background-image: url(./img/road.jpg);
     background-size: cover;
     background-position: center;
@@ -95,9 +103,9 @@ li {
     margin: 50px 0 0 0;
 }
 .box {
-    height: 50px;
-    width: 50px;
-    border-radius: 25px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -240,4 +248,42 @@ li {
     padding: 8px;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.499) inset;
+}
+
+/* sign section */
+
+h1 {
+    margin: 50px 0;
+    text-align: center;
+}
+.sign {
+    background: url(./img/background-sign.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: auto;
+    width: 100%;
+}
+
+.container-sign {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    padding: 50px 0;
+    background: rgba(0, 0, 255, 0.214);
+}
+.sign-img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    filter: grayscale();
+    transition: all 0.3s;
+}
+.sign-img:hover {
+    filter: none;
+}
+.sign-div {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
 }

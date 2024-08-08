@@ -1,5 +1,4 @@
 let totalTime = document.querySelector(".total-time");
-let allLight1 = document.querySelector(".street-1");
 let timeDisplay = document.querySelectorAll(".time-counter");
 let time1 = document.querySelector(".time-1");
 let time2 = document.querySelector(".time-2");
@@ -30,11 +29,11 @@ let lightRed = document.querySelectorAll(".light-red");
 let lightGreen = document.querySelectorAll(".light-green");
 let isUnderTime = [];
 let timeJson = [
-    // ["08:00", "12:07"], // morning rush
+    ["08:00", "12:00"], // morning rush
     ["18:00", "21:00"], //evening rush
-    ["09:20", "09:30"], //demo
-    ["09:32", "09:32"],
-    ["09:34", "10:40"], //demo
+    // ["09:20", "09:30"], //demo
+    // ["09:32", "09:32"], //demo
+    // ["09:34", "10:49"], //demo
 ];
 
 // TODO: make website view
