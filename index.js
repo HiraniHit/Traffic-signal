@@ -32,13 +32,18 @@ let timeJson = [
     ["08:00", "11:00"], // morning rush
     ["18:00", "21:00"], //evening rush
     ["12:59", "14:41"], //demo
-    ["14:43", "14:43"], //demo
-
+    ["14:43", "17:54"], //demo
+    ["17:55", "17:55"], //demo
+    ["17:57", "17:57"], //demo
+    ["17:59", "18:00"], //demo
 ];
-// setTimeout(() => {
-//     document.querySelector(".load").classList.add("hide");
-//     document.querySelector(".main").classList.remove("hide");
-// }, 500);
+
+//FIXME: over timing or less timing many time because number deduction
+
+setTimeout(() => {
+    document.querySelector(".load").classList.add("hide");
+    document.querySelector(".main").classList.remove("hide");
+}, 700);
 
 setInterval(() => {
     let currentMinutes = new Date().getMinutes().toString().padStart(2 ,"0");
@@ -152,6 +157,7 @@ function setRed(lights, arrow, text) {
     }
 }
 async function timeDivider() {
+    
     start = false;
     yellowLight.forEach((value) => {
         value.classList.remove("yellow");

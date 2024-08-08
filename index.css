@@ -303,7 +303,7 @@ h1 {
     height: 200px;
     object-fit: contain;
     filter: grayscale();
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 .sign-img:hover {
     filter: none;
