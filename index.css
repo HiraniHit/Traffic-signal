@@ -10,7 +10,26 @@ body {
     width: 100vw;
     overflow-x: hidden;
 }
-button{
+.load {
+    background-color: lightskyblue;
+    width: 100vw;
+    height: 100vh;
+    font-family: "Edu AU VIC WA NT Hand", cursive;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.load > div {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+button {
     cursor: pointer;
 }
 nav {
@@ -31,6 +50,14 @@ li {
     text-decoration: none;
     list-style: none;
     cursor: pointer;
+}
+.clock {
+    text-align: center;
+    letter-spacing: 5px;
+    font-family: "Anton", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 30px;
 }
 .logo {
     display: flex;
@@ -80,13 +107,13 @@ li {
 }
 .ratio-inputs > input {
     width: 150px;
-    padding: 8px;
+    padding: 10px 8px;
     border: none;
     outline-color: red;
     border-radius: 5px;
 }
 .ratio-inputs > button {
-    padding: 8px;
+    padding: 10px 8px;
     outline: none;
     border: none;
     border-radius: 5px;
@@ -286,4 +313,21 @@ h1 {
     display: flex;
     justify-content: space-around;
     padding: 20px;
+}
+
+/* footer */
+
+.footer {
+    background-color: rgb(6, 6, 74);
+    color: white;
+    padding: 30px;
+}
+
+.footer > div {
+    width: fit-content;
+    margin: auto;
+}
+
+.hide {
+    display: none;
 }

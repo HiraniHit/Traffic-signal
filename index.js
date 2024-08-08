@@ -29,16 +29,24 @@ let lightRed = document.querySelectorAll(".light-red");
 let lightGreen = document.querySelectorAll(".light-green");
 let isUnderTime = [];
 let timeJson = [
-    ["08:00", "12:00"], // morning rush
+    ["08:00", "11:00"], // morning rush
     ["18:00", "21:00"], //evening rush
-    // ["09:20", "09:30"], //demo
-    // ["09:32", "09:32"], //demo
-    // ["09:34", "10:49"], //demo
-];
+    ["12:59", "14:41"], //demo
+    ["14:43", "14:43"], //demo
 
-// TODO: make website view
+];
+// setTimeout(() => {
+//     document.querySelector(".load").classList.add("hide");
+//     document.querySelector(".main").classList.remove("hide");
+// }, 500);
 
 setInterval(() => {
+    let currentMinutes = new Date().getMinutes().toString().padStart(2 ,"0");
+    let currentHours = new Date().getHours().toString().padStart(2,"0");
+    let currentSeconds = new Date().getSeconds().toString().padStart(2,"0");
+    document.querySelector(
+        ".clock"
+    ).textContent = `${currentHours}:${currentMinutes}:${currentSeconds}`;
     checkTime();
 }, 1000);
 
@@ -57,7 +65,7 @@ function checkTime() {
             isUnderTime.push(false);
         }
     });
-
+    console.log(isUnderTime);
     if (!isUnderTime.includes(true)) {
         yellowLight.forEach((value) => {
             value.classList.add("yellow");
@@ -307,7 +315,6 @@ async function ratioWIseTimeDivider() {
             time1.textContent = modifyCount1;
             modifyCount1--;
         } else {
-            console.log(modifyCount1);
             time1.textContent = "stop";
             extraTimeForRatio(time1, remainingTime1);
             setRed(lights1, arrow1, time1);
@@ -320,7 +327,6 @@ async function ratioWIseTimeDivider() {
                     time2.textContent = modifyCount2;
                     modifyCount2--;
                 } else {
-                    console.log(modifyCount2);
                     time2.textContent = "stop";
                     extraTimeForRatio(time2, remainingTime2);
                     setRed(lights2, arrow2, time2);
@@ -332,7 +338,6 @@ async function ratioWIseTimeDivider() {
                             time3.textContent = modifyCount3;
                             modifyCount3--;
                         } else {
-                            console.log(modifyCount3);
                             extraTimeForRatio(time3, remainingTime3);
                             time3.textContent = "stop";
                             setRed(lights3, arrow3, time3);
@@ -343,7 +348,6 @@ async function ratioWIseTimeDivider() {
                                     time4.textContent = modifyCount4;
                                     modifyCount4--;
                                 } else {
-                                    console.log(modifyCount4);
                                     extraTimeForRatio(time4, remainingTime4);
                                     time4.textContent = "stop";
                                     setRed(lights4, arrow4, time4);

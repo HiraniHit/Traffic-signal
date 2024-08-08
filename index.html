@@ -6,7 +6,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Bungee+Shade&family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Micro+5&family=Mr+Dafoe&family=Silkscreen:wght@400;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Anton&family=Bungee+Shade&family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=Micro+5&family=Mr+Dafoe&family=Silkscreen:wght@400;700&display=swap"
             rel="stylesheet"
         />
         <link
@@ -18,141 +18,162 @@
         <title>Traffic signal</title>
     </head>
     <body>
-        <nav>
-            <div class="logo">
-                <img src="./img/favicon.png" alt="" width="30" />
+        <!-- <div class="load">
+            <div>
+                <img src="img/favicon.png" alt="loading img" width="60" />
                 <span>trafficano</span>
             </div>
-            <div>Welcome to our website</div>
-            <ul>
-                <li>Home</li>
-                <li>Info</li>
-                <li>Contact Us</li>
-            </ul>
-        </nav>
+        </div> -->
+        <div class="main">
+            <nav>
+                <div class="logo">
+                    <img src="./img/favicon.png" alt="" width="30" />
+                    <span>trafficano</span>
+                </div>
+                <div>Welcome to our website</div>
+                <ul>
+                    <li>Home</li>
+                    <li>Info</li>
+                    <li>Contact Us</li>
+                </ul>
+            </nav>
+            <section class="testing">
+                <div class="clock"></div>
+                <div class="total">
+                    <input
+                        type="text"
+                        class="total-time"
+                        placeholder="Enter total time in seconds"
+                    />
+                    <button onclick="timeDivider()">Start</button>
+                </div>
+                <div class="ratio-inputs">
+                    <input
+                        type="text"
+                        class="input-street-1 ratio"
+                        placeholder="North in %"
+                    />
+                    <input
+                        type="text"
+                        class="input-street-2 ratio"
+                        placeholder="East in %"
+                    />
+                    <input
+                        type="text"
+                        class="input-street-3 ratio"
+                        placeholder="South in %"
+                    />
+                    <input
+                        type="text"
+                        class="input-street-4 ratio"
+                        placeholder="West in %"
+                    />
+                    <button onclick="ratioWIseTimeDivider()">
+                        Apply & Start
+                    </button>
+                </div>
 
-        <section class="testing">
-            <div class="total">
-                <input
-                    type="text"
-                    class="total-time"
-                    placeholder="Enter total time in seconds"
-                />
-                <button onclick="timeDivider()">Start</button>
-            </div>
-            <div class="ratio-inputs">
-                <input
-                    type="text"
-                    class="input-street-1 ratio"
-                    placeholder="North in %"
-                />
-                <input
-                    type="text"
-                    class="input-street-2 ratio"
-                    placeholder="East in %"
-                />
-                <input
-                    type="text"
-                    class="input-street-3 ratio"
-                    placeholder="South in %"
-                />
-                <input
-                    type="text"
-                    class="input-street-4 ratio"
-                    placeholder="West in %"
-                />
-                <button onclick="ratioWIseTimeDivider()">Apply & Start</button>
-            </div>
+                <div class="signal">
+                    <div class="street-1 light">
+                        <div class="time-1 time-counter">Go</div>
+                        <div class="light-red box"></div>
+                        <div class="yellow light-yellow box"></div>
+                        <div class="light-green box"></div>
+                        <div class="arrow up box">&#8593;</div>
+                        <div class="arrow left box">&#8592;</div>
+                        <div class="arrow right box">&#8594;</div>
+                    </div>
+                    <div class="street-2 light">
+                        <div class="time-2 time-counter">Go</div>
+                        <div class="light-red box"></div>
+                        <div class="yellow light-yellow box"></div>
+                        <div class="light-green box"></div>
+                        <div class="arrow up box">&#8593;</div>
+                        <div class="arrow left box">&#8592;</div>
+                        <div class="arrow right box">&#8594;</div>
+                    </div>
+                    <div class="street-3 light">
+                        <div class="time-3 time-counter">Go</div>
+                        <div class="light-red box"></div>
+                        <div class="yellow light-yellow box"></div>
+                        <div class="light-green box"></div>
+                        <div class="arrow up box">&#8593;</div>
+                        <div class="arrow left box">&#8592;</div>
+                        <div class="arrow right box">&#8594;</div>
+                    </div>
+                    <div class="street-4 light">
+                        <div class="time-4 time-counter">Go</div>
+                        <div class="light-red box"></div>
+                        <div class="yellow light-yellow box"></div>
+                        <div class="light-green box"></div>
+                        <div class="arrow up box">&#8593;</div>
+                        <div class="arrow left box">&#8592;</div>
+                        <div class="arrow right box">&#8594;</div>
+                    </div>
+                </div>
+            </section>
+            <h1 id="info">info</h1>
+            <section class="sign">
+                <div class="container-sign">
+                    <div class="sign-div">
+                        <img
+                            class="sign-img"
+                            src="./img/children-160671_1280.png"
+                            alt="children cross road"
+                            title="children cross road"
+                        />
+                        <img
+                            class="sign-img"
+                            src="./img/green-1315028_1280.jpg"
+                            alt="go"
+                            title="go sign"
+                        />
+                        <img
+                            class="sign-img"
+                            src="./img/traffic-sign-160656_1280.png"
+                            alt="high turn"
+                            title="high turn"
+                        />
+                        <img
+                            class="sign-img"
+                            src="./img/no-motor-vehicles-160698_1280.png"
+                            alt="no motor vehicles"
+                            title="motor vehicles not allow"
+                        />
+                    </div>
+                    <div class="sign-div">
+                        <img
+                            class="sign-img"
+                            src="./img/no-stopping-160697_1280.png"
+                            alt="no stop"
+                            title="no stop"
+                        />
+                        <img
+                            class="sign-img"
+                            src="./img/sign-160740_1280.png"
+                            alt="30 limit"
+                            title="30 limit"
+                        />
+                        <img
+                            class="sign-img"
+                            src="./img/road-narrows-on-both-sides-160655_1280.png"
+                            alt="narrow road"
+                            title="narrow road"
+                        />
+                        <img
+                            class="sign-img"
+                            src="./img/no-left-turn-160689_1280.png"
+                            alt="no left turn"
+                            title="no left turn"
+                        />
+                    </div>
+                </div>
+            </section>
 
-            <div class="signal">
-                <div class="street-1 light">
-                    <div class="time-1 time-counter">Go</div>
-                    <div class="light-red box"></div>
-                    <div class="yellow light-yellow box"></div>
-                    <div class="light-green box"></div>
-                    <div class="arrow up box">&#8593;</div>
-                    <div class="arrow left box">&#8592;</div>
-                    <div class="arrow right box">&#8594;</div>
-                </div>
-                <div class="street-2 light">
-                    <div class="time-2 time-counter">Go</div>
-                    <div class="light-red box"></div>
-                    <div class="yellow light-yellow box"></div>
-                    <div class="light-green box"></div>
-                    <div class="arrow up box">&#8593;</div>
-                    <div class="arrow left box">&#8592;</div>
-                    <div class="arrow right box">&#8594;</div>
-                </div>
-                <div class="street-3 light">
-                    <div class="time-3 time-counter">Go</div>
-                    <div class="light-red box"></div>
-                    <div class="yellow light-yellow box"></div>
-                    <div class="light-green box"></div>
-                    <div class="arrow up box">&#8593;</div>
-                    <div class="arrow left box">&#8592;</div>
-                    <div class="arrow right box">&#8594;</div>
-                </div>
-                <div class="street-4 light">
-                    <div class="time-4 time-counter">Go</div>
-                    <div class="light-red box"></div>
-                    <div class="yellow light-yellow box"></div>
-                    <div class="light-green box"></div>
-                    <div class="arrow up box">&#8593;</div>
-                    <div class="arrow left box">&#8592;</div>
-                    <div class="arrow right box">&#8594;</div>
-                </div>
-            </div>
-        </section>
-        <h1 id="info">info</h1>
-        <section class="sign">
-            <div class="container-sign">
-                <div class="sign-div">
-                    <img
-                        class="sign-img"
-                        src="./img/children-160671_1280.png"
-                        alt="children"
-                    />
-                    <img
-                        class="sign-img"
-                        src="./img/green-1315028_1280.jpg"
-                        alt="children"
-                    />
-                    <img
-                        class="sign-img"
-                        src="./img/traffic-sign-160656_1280.png"
-                        alt="children"
-                    />
-                    <img
-                        class="sign-img"
-                        src="./img/no-motor-vehicles-160698_1280.png"
-                        alt="children"
-                    />
-                </div>
-                <div class="sign-div">
-                    <img
-                        class="sign-img"
-                        src="./img/no-stopping-160697_1280.png"
-                        alt="children"
-                    />
-                    <img
-                        class="sign-img"
-                        src="./img/sign-160740_1280.png"
-                        alt="children"
-                    />
-                    <img
-                        class="sign-img"
-                        src="./img/road-narrows-on-both-sides-160655_1280.png"
-                        alt="children"
-                    />
-                    <img
-                        class="sign-img"
-                        src="./img/no-left-turn-160689_1280.png"
-                        alt="children"
-                    />
-                </div>
-            </div>
-        </section>
+            <section class="footer">
+                <div>Terms and condition applied</div>
+            </section>
+        </div>
     </body>
     <script src="index.js"></script>
-    <!-- <script src="test.js"></script> -->
 </html>
