@@ -30,12 +30,13 @@ let lightGreen = document.querySelectorAll(".light-green");
 let isUnderTime = [];
 let timeJson = [
     ["08:00", "11:00"], // morning rush
-    ["18:00", "21:00"], //evening rush
-    ["12:59", "14:41"], //demo
-    ["14:43", "17:54"], //demo
-    ["17:55", "17:55"], //demo
-    ["17:57", "17:57"], //demo
-    ["17:59", "18:00"], //demo
+    ["16:00", "21:00"], //evening rush
+    // ["12:59", "14:41"], //demo
+    // ["14:43", "17:54"], //demo
+    // ["17:55", "17:55"], //demo
+    // ["17:57", "17:57"], //demo
+    // ["17:59", "18:00"], //demo
+    ["12:42", "12:43"],
 ];
 
 //FIXME: over timing or less timing many time because number deduction
@@ -46,9 +47,9 @@ setTimeout(() => {
 }, 700);
 
 setInterval(() => {
-    let currentMinutes = new Date().getMinutes().toString().padStart(2 ,"0");
-    let currentHours = new Date().getHours().toString().padStart(2,"0");
-    let currentSeconds = new Date().getSeconds().toString().padStart(2,"0");
+    let currentMinutes = new Date().getMinutes().toString().padStart(2, "0");
+    let currentHours = new Date().getHours().toString().padStart(2, "0");
+    let currentSeconds = new Date().getSeconds().toString().padStart(2, "0");
     document.querySelector(
         ".clock"
     ).textContent = `${currentHours}:${currentMinutes}:${currentSeconds}`;
@@ -78,7 +79,7 @@ function checkTime() {
         allArrow.forEach((item) => (item.style.color = "white"));
         lightGreen.forEach((value) => value.classList.remove("green"));
         lightRed.forEach((value) => value.classList.remove("red"));
-        timeDisplay.forEach((value, i) => {
+        timeDisplay.forEach((value) => {
             value.textContent = "Go";
             value.style.opacity = "0";
         });
@@ -99,7 +100,9 @@ function checkTime() {
             light.classList.contains("continue1")
         ) {
             timeDisplay.forEach((value) => (value.style.opacity = "1"));
-            ratioWIseTimeDivider();
+            if (!light.classList.contains("continue")) {
+                ratioWIseTimeDivider();
+            }
         }
         return true;
     }
@@ -157,7 +160,6 @@ function setRed(lights, arrow, text) {
     }
 }
 async function timeDivider() {
-    
     start = false;
     yellowLight.forEach((value) => {
         value.classList.remove("yellow");
@@ -176,6 +178,8 @@ async function timeDivider() {
     if (!checkTime()) {
         return;
     }
+    let light = document.querySelector(".light-yellow");
+    if (light.classList.contains("continue1")) return;
     yellowLight.forEach((value) => value.classList.add("continue"));
     let count1 = Math.floor(time / 4);
     let count2 = Math.floor(time / 4);
@@ -259,6 +263,8 @@ async function timeDivider() {
     }, 1000);
 }
 
+// second part with percentage
+
 function extraTimeForRatio(timer, elapsedTime) {
     let extraTime = elapsedTime + 3;
 
@@ -311,7 +317,17 @@ async function ratioWIseTimeDivider() {
         alert("Please enter a valid total time.");
         return;
     }
-
+    if (
+        isNaN(modifyCount1) ||
+        isNaN(modifyCount2) ||
+        isNaN(modifyCount3) ||
+        isNaN(modifyCount4)
+    ) {
+        alert("Please enter a valid percentage");
+        return;
+    }
+    let light = document.querySelector(".light-yellow");
+    if (light.classList.contains("continue")) return;
     timer1 = await setInterval(() => {
         if (modifyCount1 >= 1) {
             setGreen(lights1, arrow1, time1);
