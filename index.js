@@ -36,10 +36,11 @@ let timeJson = [
     // ["17:55", "17:55"], //demo
     // ["17:57", "17:57"], //demo
     // ["17:59", "18:00"], //demo
-    ["12:42", "12:43"],
+    ["12:42", "15:00"],
+    ["15:06","15:21"]
 ];
 
-//FIXME: over timing or less timing many time because number deduction
+//FIXME: over timing or less timing many time because number deduction 
 
 setTimeout(() => {
     document.querySelector(".load").classList.add("hide");
